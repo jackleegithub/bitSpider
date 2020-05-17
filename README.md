@@ -32,6 +32,7 @@
 * HTML文档 --->--- BeautifulSoup 类 ---->--- 树形结构（类似DOM）
 * 解析器：html.parser,lxml,lxml-xml, html5lib
 * 基本元素：Tag(Name(.name),Attributes(.attrs))、NavigableString(.string)、Comment(.string)
+* 友好显示：.prettify()
 ## BS 遍历
 * 下行遍历：
  1. .contents: 儿子节点列表
@@ -45,3 +46,9 @@
  2. .previous_sibling:返回按照HTML文本顺序的上一个平行节点
  3. .next_siblings:返回按照HTML文本顺序的后续所有平行节点
  4. .previous_siblings:返回按照HTML文本顺序的前续所有平行节点
+
+ # 信息标记
+ 1. XML: eXtensible Markup Language. 
+ `
+ <p class="data"> some text </p>
+ `
