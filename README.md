@@ -27,3 +27,21 @@
 * 语法：User-agent, Disallow, Allow
 * 使用：自动或者人工识别 robots.txt 的内容，然后再进行爬取。
 
+# Beautiful Soup
+* 引用: from bs4 import BeautifulSoup
+* HTML文档 --->--- BeautifulSoup 类 ---->--- 树形结构（类似DOM）
+* 解析器：html.parser,lxml,lxml-xml, html5lib
+* 基本元素：Tag(Name(.name),Attributes(.attrs))、NavigableString(.string)、Comment(.string)
+## BS 遍历
+* 下行遍历：
+ 1. .contents: 儿子节点列表
+ 2. .children: 儿子节点迭代器
+ 3. .descendants: 子孙节点的迭代类型
+ * 上行遍历
+ 1. .parent: 父节点
+ 2. .parents: 先辈节点的迭代类型
+ * 平行遍历
+ 1. .next_sibling: 返回按照HTML文本顺序的下一个平行节点
+ 2. .previous_sibling:返回按照HTML文本顺序的上一个平行节点
+ 3. .next_siblings:返回按照HTML文本顺序的后续所有平行节点
+ 4. .previous_siblings:返回按照HTML文本顺序的前续所有平行节点
