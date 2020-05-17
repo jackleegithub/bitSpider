@@ -48,7 +48,7 @@
  4. .previous_siblings:返回按照HTML文本顺序的前续所有平行节点
 
  # 信息标记
- 1. XML: eXtensible Markup Language. ```html
+ 1. XML: eXtensible Markup Language. '''html
  <p class="data"> some text </p>
- ```
+ '''
  2. JSON: JavaScript Object Notation.
