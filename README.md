@@ -1,4 +1,5 @@
 # 课程信息
+* 课程地址：https://www.bilibili.com/video/BV1kx411S7Fh
 * 授课老师：嵩天
 * 课程简介：“The website is the API.”网络爬虫逐渐成为自动获取网络信息的主要形式。还等什么？快写个爬虫探索世界吧！
 
@@ -14,4 +15,15 @@
 * 对网站性能的影响，带来资源开销。
 * 法律风险，数据版权归属
 * 个人隐私泄露
+
+## 限制爬虫
+* 来源审查：如果有网站的管理权限，做来源审查。检查来访HTTP协议头的 User-Agent 字段。技术要求高。
+* 发布公告：Robots协议，需要爬虫配合使用。
+
+## Robots 协议
+* Robots Exclusion Standard 网络爬虫排除标准。
+* 作用：网站告知爬虫哪些页面可以爬取，哪些页面不可以。
+* 位置：在网站根目录下的 robots.txt 文件。
+* 语法：User-agent, Disallow, Allow
+* 使用：自动或者人工识别 robots.txt 的内容，然后再进行爬取。
 
