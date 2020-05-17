@@ -47,8 +47,70 @@
  3. .next_siblings:返回按照HTML文本顺序的后续所有平行节点
  4. .previous_siblings:返回按照HTML文本顺序的前续所有平行节点
 
- # 信息标记
- 1. XML: eXtensible Markup Language. '''html
- <p class="data"> some text </p>
- '''
- 2. JSON: JavaScript Object Notation.
+# 信息标记
+1. XML: eXtensible Markup Language.标签(tag) `<p class="data"> some text </p>`
+2. JSON: JavaScript Object Notation.有类型的键值对(key/value)`{"name":"jack","age":100,"address":["bj","sh"]}`
+3. YAML: YAMLAin't Markup Language.  无类型的键值对Key/Value.
+```yaml
+name:
+   newname:abc
+   oldname:xyz
+```
+4. XML example.
+``` XML
+<person>
+   <firstname>Li</firstname>
+   <lastname>zhixin</lastname>
+   <address>
+      <street>丰台区益泽路</street>
+      <city>北京</city>
+      <zipcode>100071</zipcode>
+   </address>
+   <prof>Computer System</prof>
+   <prof>Security</prof>
+</person>
+```
+5. JSON example.
+```JSON
+{
+   "person":{
+      "firstname":"Li",
+      "lastname":"zhixin",
+      "address":{
+         "street":"丰台区益泽路",
+         "city":"北京市",
+         "zipcode":"100071"
+      },
+      "prof":["Computer System","Security"]
+   }
+}
+```
+6. YAML example.
+```YAML
+person:
+   firstname: Li
+   lastname: zhixin
+   address:
+      street: 丰台区益泽路
+      city: 北京
+      zipcode: 100071
+   prof:
+      - Computer System
+      - Security
+```
+## XML JSON YAML 对比
+1. XML 最早的通用信息标记语言，可扩展性好，繁琐，无用数据多。Internet 上的主要信息交互和传递。
+2. JSON 信息有数据类型，适合程序处理。移动应用云端和节点的信息通信，无注释。
+3. YAML 信息无类型，文本信息比例高，可读性好。各类系统的配置文件，有注释易懂。
+
+# 字符串格式化
+* "{} some {} string {} ....".format(data1, data2, data3, ......)
+* {:x^10,.3d}
+  * **:**: 引导字符
+  * **x**: 填充字符
+  * **^**: 对齐方式，<左对齐, ^居中, >右对齐。
+  * **10**: 域的宽度
+  * **,**: 数字的千分位标志，适合整数和浮点数
+  * **.3**: 浮点数的精度或者字符串的最大长度。
+  * **d**: 数值类型。整数-b c d o x X,浮点-e E f %。
+* 中英文混排，填充字符可以使用中文的空格，chr(12288)或者"\u3000"
