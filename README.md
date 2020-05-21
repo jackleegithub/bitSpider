@@ -118,5 +118,13 @@ person:
 # 正则表达式
 * 断言内不能使用数量修饰词
 * 模式字符串中的()[]{}需要转义。 \\(, \\), \\[, \\], \\{, \\}
-# 小技巧
+# 进度条
 * 利用 "\r" 实现进度百分百。`print('\r{:.2f}%'.format(35.23))`
+* 进度条有多种算法，线性的，先快后慢，先慢后快等等
+
+# html.parser 模块中的 HTMLPaser 类解析HTML文档
+* def handle_starttag(self, tag, attrs):
+* def handle_data(self, data):
+* def handle_endtag(self, tag):
+* myPaser.feed(html)
+* myPaser.close()
