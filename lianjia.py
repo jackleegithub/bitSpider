@@ -60,7 +60,7 @@ except Exception as e:
    print(e)
    
 
-for qx in lsDistrict:
+for qx in lsDistrict:#各个区县的小区
 
    count = 0#区县小区的数量
    pagesize = 30#分页页面上小区的数量
@@ -80,7 +80,7 @@ for qx in lsDistrict:
    startTime = time.perf_counter()
    pagecount = math.ceil(count / pagesize)#总页数
 
-   for index in range(1,pagecount + 1):
+   for index in range(1,pagecount + 1):#获取每个页面上的数据
       url = 'https://bj.lianjia.com/xiaoqu/fengtai/pg' + str(index)
       
       r = requests.get(url)
@@ -89,7 +89,7 @@ for qx in lsDistrict:
       pattern = re.compile('<a href="(https://bj.lianjia.com/xiaoqu/\\d+?/)" target="_blank">(.+)</a>')  #小区名称
       iter = pattern.finditer(pageText)
       txtResult = ""
-      for it in iter:
+      for it in iter:#迭代每个页面上的小区信息
          url = it.group(1)#小区的地址
          name = it.group(2)#小区的名称
          pattern = re.compile('<div class="totalPrice"><span>(\\d+)</span>元/m<sup>2</sup></div>') #均价
@@ -122,11 +122,13 @@ for qx in lsDistrict:
             
          r ="{},{},{},{},{},{}\n".format(name, price,sellCount, district, bizcircle,url)
          txtResult = txtResult + r
-      with open('lianjia.txt','at') as f:
+      with open('lianjia.txt','at') as f:#数据写入文件
          f.write(txtResult)
 
+      #进度条
+      spantime = time.perf_counter() - startTime
       prec = index / pagecount * 100
-      print("\r{}完成{:.2f}%，{}".format(qx[1],prec, ('>'* math.ceil(prec*0.5)).ljust(50,"|")), end="")#进度条
-      time.sleep(random.randint(1,10)/10)#延时，模拟人工0.1--0.9s
+      print("\r{}完成{:.2f}%，[{}],cost time {:6.2f}s.".format(qx[1],prec, ('>'* math.ceil(prec*0.5)).ljust(50,"|"),spantime), end="")#进度条
+      time.sleep(random.randint(1,10))#延时，模拟人工0.1--0.9s
 
-   print("\n{}总共耗时{:.5f}s。".format(qx[1], time.perf_counter() - startTime))
+   
