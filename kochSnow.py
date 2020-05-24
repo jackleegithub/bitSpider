@@ -15,7 +15,7 @@ def koch(size, n):
    else:
       for angle in [0, 60, -120, 60]:
          turtle.left(angle)
-         koch(size/3, n - 1)
+         koch(size / 3, n - 1)
 
 def main():
    level = 5
@@ -24,6 +24,7 @@ def main():
    turtle.pensize(1)
    turtle.goto(-400, 200)
    turtle.pendown()
+   
    koch(800, level)
    turtle.right(120)
    koch(800, level)

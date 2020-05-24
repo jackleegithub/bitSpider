@@ -18,28 +18,32 @@
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext('2d');
       
+      ctx.fillStyle="#FF0000";
       ctx.beginPath();   
       var x = 500,
-          y = 120,
-          NUM = 6,//基础图形的边数
+          y = 150,
+          NUM = 3,//基础图形的边数
           LEVEL = 5;//每边科赫次数
       if(NUM >= 10){
          throw "基础图形的边数小于10";
       }
-      var side = (10 - NUM) * 100;
+      var side = (10 - NUM) * 90;
       ctx.translate(x, y);
       for(var i = 0, len = NUM; i < NUM;i++){
-         koch(ctx, side, LEVEL);
+         koch3(ctx, side, LEVEL);
          ctx.rotate(2 * Math.PI / NUM);
       }
-       
+      
+      ctx.closePath();
+      
       ctx.stroke();
+      
 
-      //科赫曲线函数
+      //3次科赫曲线函数
       //ctx:画布
       //side:边长
       //level:执行次数
-      function koch(ctx, side, level){
+      function koch3(ctx, side, level){
          if(level == 0){//基例
             ctx.moveTo(0,0);//移动到原点，因为坐标系做了平移和旋转的处理
             ctx.lineTo(side, 0);//画线
@@ -50,14 +54,36 @@
                ctx.rotate(angles[i]);//坐标系旋转
 
                ctx.save();//保存当前状态
-               koch(ctx, side / 3, level - 1);
+               koch3(ctx, side / 3, level - 1);
+               ctx.restore();//恢复之前保存的状态
+               
+               ctx.translate(side / 3, 0);//平移坐标系
+            }           
+         }
+      }
+      //4次科赫曲线函数
+      //ctx:画布
+      //side:边长
+      //level:执行次数
+      function koch4(ctx, side, level){
+         if(level == 0){//基例
+            ctx.moveTo(0,0);//移动到原点，因为坐标系做了平移和旋转的处理
+            ctx.lineTo(side, 0);//画线
+            
+         }else{//递归链条
+
+            var angles = [0, -Math.PI/2, Math.PI/2,Math.PI/2,-Math.PI/2];//四条边的坐标系旋转的角度
+            for(var i = 0, len = angles.length; i < len; i++){ 
+               ctx.rotate(angles[i]);//坐标系旋转
+
+               ctx.save();//保存当前状态
+               koch4(ctx, side / 3, level - 1);
                ctx.restore();//恢复之前保存的状态
 
                ctx.translate(side / 3, 0);//平移坐标系
             }           
          }
       }
-
       /*
       init();
       function init(){
