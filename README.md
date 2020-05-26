@@ -128,3 +128,8 @@ person:
 * def handle_endtag(self, tag):
 * myPaser.feed(html)
 * myPaser.close()
+
+# 列表、字典、集合
+* list,[],(),
+* dict,{}。字典转列表 --> list(dict.items())
+* set,交并补 --> &|-^
