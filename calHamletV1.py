@@ -1,4 +1,4 @@
-#Hamlet英文词频统计实例,分析 res/hamlet.txt
+#Hamlet英文词频统计实例,分析res/hamlet.txt
 #获取小说内容
 def getText(path):
    txt = ''
