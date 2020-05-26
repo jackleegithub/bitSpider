@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>谢尔宾斯基三角形,Sierpinski triangle,Javascrip 实现</title>
+   <style>
+      h2{
+         text-align: center;
+      }
+      #canvas{
+         display: block;
+         margin: auto;
+         background-color: #eee;
+      }
+   </style>
+</head>
+<body>
+   <h2>谢尔宾斯基三角形</h2>
+   <canvas id="canvas" width="800" height="800"></canvas>
+   <script>
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+     
+      var LEVEL = 6;
+      var t = LEVEL;
+      sierpinskiTriangle([400, 50], [750, 350* Math.sqrt(3) + 50], [50, 350* Math.sqrt(3) + 50], LEVEL);
+
+      //计算两点之间的中点
+      function midPoints(a, b){
+         var x = (a[0] + b[0]) / 2,
+             y = (a[1] + b[1]) / 2;
+
+         return [x, y];
+      }
+
+      //根据三个点的坐标画三角形
+      function drawTriangle(a, b, c, color){
+         ctx.beginPath();
+         ctx.fillStyle = color;
+
+         ctx.moveTo(a[0],a[1]);
+         ctx.lineTo(b[0],b[1]);
+         ctx.lineTo(c[0],c[1]);
+         ctx.lineTo(a[0],a[1]);
+
+         ctx.closePath();
+         ctx.fill();
+         ctx.stroke();
+      }
+
+      function drawTriangleNoColor(a, b, c){
+         ctx.beginPath();
+         
+         ctx.moveTo(a[0],a[1]);
+         ctx.lineTo(b[0],b[1]);
+         ctx.lineTo(c[0],c[1]);
+         ctx.lineTo(a[0],a[1]);
+
+         ctx.closePath();
+         ctx.stroke();
+      }
+
+      //递归函数实现谢尔宾斯基三角形
+      function sierpinskiTriangle(a, b, c, level){
+         if(level === 0){//基础例子
+            drawTriangle(a, b, c,'black');
+         }else if(level === 1){//基础例子
+            var d = midPoints(a, b),
+                e = midPoints(b, c),
+                f = midPoints(c, a);
+                drawTriangle(a, b, c,'black');
+                drawTriangle(d, e ,f,'white');
+         }else{//递归链条
+            var d = midPoints(a, b),
+                e = midPoints(b, c),
+                f = midPoints(c, a);
+                sierpinskiTriangle(a, d, f, level - 1);
+                sierpinskiTriangle(b, e, d, level - 1);
+                sierpinskiTriangle(c, f, e, level - 1);
+         }
+      }
+   </script>
+</body>
+</html>

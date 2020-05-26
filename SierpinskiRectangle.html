@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>谢尔宾斯基地毯,Sierpinski rectangle,Javascrip 实现</title>
+   <style>
+      h2{
+         text-align: center;
+      }
+      #canvas{
+         display: block;
+         margin: auto;
+         background-color: #eee;
+      }
+   </style>
+</head>
+<body>
+   <h2>谢尔宾斯基三角形</h2>
+   <canvas id="canvas" width="800" height="800"></canvas>
+   <script>
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+      
+      var LEVEL = 4;
+      
+      sierpinskiRectangle([50, 50], [750, 50], [750, 750], [50, 750], LEVEL);
+
+      //计算两点之间的1/3处的点
+      function oneThird(a, b){
+         var x = a[0] + (b[0] - a[0]) / 3,
+             y = a[1] + (b[1] - a[1]) / 3;
+
+         return [x, y];
+      }
+      //计算两点之间的2/3处的点
+      function twoThird(a, b){
+         var x = a[0] + (b[0] - a[0]) / 3 * 2,
+             y = a[1] + (b[1] - a[1]) / 3 * 2;
+
+         return [x, y];
+      }
+
+      //根据四个点的坐标画矩形
+      function drawRectangle(a, b, c, d,color){
+         ctx.beginPath();
+         ctx.fillStyle = color;
+         ctx.moveTo(a[0],a[1]);
+         ctx.lineTo(b[0],b[1]);
+         ctx.lineTo(c[0],c[1]);
+         ctx.lineTo(d[0],d[1]);
+         ctx.lineTo(a[0],a[1]);
+         ctx.fill()
+         ctx.closePath();
+         ctx.stroke();
+      }
+
+      //递归函数实现谢尔宾斯基地毯
+      function sierpinskiRectangle(a, b, c, d, level){
+         if(level === 0){//基础例子
+            drawRectangle(a, b, c, d, 'red');
+         }else if(level === 1){//基础例子
+            var e = oneThird(a, b),
+                g = oneThird(b, c),
+                i = oneThird(c, d),
+                k = oneThird(d, a);
+
+            var f = twoThird(a, b),
+                h = twoThird(b, c),
+                j = twoThird(c, d),
+                l = twoThird(d, a);
+
+            var m = oneThird(l, g),
+                n = twoThird(l, g),
+                p = oneThird(k, h),
+                o = twoThird(k, h);
+               
+                drawRectangle(a, b, c, d, 'red');
+                drawRectangle(m, n, o, p, '#FFFFFF');
+         }else{//递归链条
+            var e = oneThird(a, b),
+                g = oneThird(b, c),
+                i = oneThird(c, d),
+                k = oneThird(d, a);
+
+            var f = twoThird(a, b),
+                h = twoThird(b, c),
+                j = twoThird(c, d),
+                l = twoThird(d, a);
+
+            var m = oneThird(l, g),
+                n = twoThird(l, g),
+                p = oneThird(k, h),
+                o = twoThird(k, h);
+
+                sierpinskiRectangle(a, e, m, l,level - 1);
+                sierpinskiRectangle(e, f, n, m,level - 1);
+                sierpinskiRectangle(f, b, g, n,level - 1);
+                sierpinskiRectangle(n, g, h, o,level - 1);
+                sierpinskiRectangle(o, h, c, i,level - 1);
+                sierpinskiRectangle(p, o, i, j,level - 1);
+                sierpinskiRectangle(k, p, j, d,level - 1);
+                sierpinskiRectangle(l, m, p, k,level - 1);
+                sierpinskiRectangle(a, e, m, l,level - 1);
+         }
+      }
+   </script>
+</body>
+</html>
